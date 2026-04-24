@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{4a93c105-f6f9-4d26-bce7-faf1b7395d8f}</ProjectGuid>
+    <RootNamespace>MCHook</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;MCHOOK_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;MCHOOK_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;MCHOOK_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src;$(ProjectDir)include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile />
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>WindowsApp.lib;$(ProjectDir)lib\libMinHook.x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;MCHOOK_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="include\android\View.h" />
+    <ClInclude Include="include\magic_enum\magic_enum.hpp" />
+    <ClInclude Include="include\magic_enum\magic_enum_all.hpp" />
+    <ClInclude Include="include\magic_enum\magic_enum_containers.hpp" />
+    <ClInclude Include="include\magic_enum\magic_enum_flags.hpp" />
+    <ClInclude Include="include\magic_enum\magic_enum_format.hpp" />
+    <ClInclude Include="include\magic_enum\magic_enum_fuse.hpp" />
+    <ClInclude Include="include\magic_enum\magic_enum_iostream.hpp" />
+    <ClInclude Include="include\magic_enum\magic_enum_switch.hpp" />
+    <ClInclude Include="include\magic_enum\magic_enum_utility.hpp" />
+    <ClInclude Include="src\features\event\PacketOutEvent.h" />
+    <ClInclude Include="src\sdk\game\network\LoopbackPacketSender.h" />
+    <ClInclude Include="src\hook\PacketSendHook.h" />
+    <ClInclude Include="src\features\modules\player\NoFall.h" />
+    <ClInclude Include="src\features\event\NotifyEvent.h" />
+    <ClInclude Include="src\features\modules\visual\Notifications.h" />
+    <ClInclude Include="src\features\modules\combat\Reach.h" />
+    <ClInclude Include="src\sdk\game\network\MinecraftPacketIds.hpp" />
+    <ClInclude Include="src\sdk\game\network\packet\IPacketHandlerDispatcher.h" />
+    <ClInclude Include="src\sdk\game\network\packet\Packet.h" />
+    <ClInclude Include="src\sdk\game\network\packet\PlayerAuthInputPacket.h" />
+    <ClInclude Include="src\sdk\game\world\block\BlockLegacy.h" />
+    <ClInclude Include="src\sdk\game\world\block\Block.h" />
+    <ClInclude Include="src\sdk\game\world\block\BlockSource.h" />
+    <ClInclude Include="src\features\modules\player\Scaffold.h" />
+    <ClInclude Include="src\features\modules\visual\ChestEsp.h" />
+    <ClInclude Include="src\sdk\game\world\Minecraft.h" />
+    <ClInclude Include="src\hook\ClientInstanceHook.h" />
+    <ClInclude Include="src\sdk\game\ClientInstance.h" />
+    <ClInclude Include="include\entt\config\config.h" />
+    <ClInclude Include="include\entt\config\macro.h" />
+    <ClInclude Include="include\entt\config\version.h" />
+    <ClInclude Include="include\entt\container\dense_map.hpp" />
+    <ClInclude Include="include\entt\container\dense_set.hpp" />
+    <ClInclude Include="include\entt\container\fwd.hpp" />
+    <ClInclude Include="include\entt\container\table.hpp" />
+    <ClInclude Include="include\entt\core\algorithm.hpp" />
+    <ClInclude Include="include\entt\core\any.hpp" />
+    <ClInclude Include="include\entt\core\bit.hpp" />
+    <ClInclude Include="include\entt\core\compressed_pair.hpp" />
+    <ClInclude Include="include\entt\core\concepts.hpp" />
+    <ClInclude Include="include\entt\core\enum.hpp" />
+    <ClInclude Include="include\entt\core\family.hpp" />
+    <ClInclude Include="include\entt\core\fwd.hpp" />
+    <ClInclude Include="include\entt\core\hashed_string.hpp" />
+    <ClInclude Include="include\entt\core\ident.hpp" />
+    <ClInclude Include="include\entt\core\iterator.hpp" />
+    <ClInclude Include="include\entt\core\memory.hpp" />
+    <ClInclude Include="include\entt\core\monostate.hpp" />
+    <ClInclude Include="include\entt\core\ranges.hpp" />
+    <ClInclude Include="include\entt\core\tuple.hpp" />
+    <ClInclude Include="include\entt\core\type_info.hpp" />
+    <ClInclude Include="include\entt\core\type_traits.hpp" />
+    <ClInclude Include="include\entt\core\utility.hpp" />
+    <ClInclude Include="include\entt\entity\component.hpp" />
+    <ClInclude Include="include\entt\entity\entity.hpp" />
+    <ClInclude Include="include\entt\entity\fwd.hpp" />
+    <ClInclude Include="include\entt\entity\group.hpp" />
+    <ClInclude Include="include\entt\entity\handle.hpp" />
+    <ClInclude Include="include\entt\entity\helper.hpp" />
+    <ClInclude Include="include\entt\entity\mixin.hpp" />
+    <ClInclude Include="include\entt\entity\organizer.hpp" />
+    <ClInclude Include="include\entt\entity\ranges.hpp" />
+    <ClInclude Include="include\entt\entity\registry.hpp" />
+    <ClInclude Include="include\entt\entity\runtime_view.hpp" />
+    <ClInclude Include="include\entt\entity\snapshot.hpp" />
+    <ClInclude Include="include\entt\entity\sparse_set.hpp" />
+    <ClInclude Include="include\entt\entity\storage.hpp" />
+    <ClInclude Include="include\entt\entity\view.hpp" />
+    <ClInclude Include="include\entt\entt.hpp" />
+    <ClInclude Include="include\entt\fwd.hpp" />
+    <ClInclude Include="include\entt\graph\adjacency_matrix.hpp" />
+    <ClInclude Include="include\entt\graph\dot.hpp" />
+    <ClInclude Include="include\entt\graph\flow.hpp" />
+    <ClInclude Include="include\entt\graph\fwd.hpp" />
+    <ClInclude Include="include\entt\locator\locator.hpp" />
+    <ClInclude Include="include\entt\meta\adl_pointer.hpp" />
+    <ClInclude Include="include\entt\meta\container.hpp" />
+    <ClInclude Include="include\entt\meta\context.hpp" />
+    <ClInclude Include="include\entt\meta\factory.hpp" />
+    <ClInclude Include="include\entt\meta\fwd.hpp" />
+    <ClInclude Include="include\entt\meta\meta.hpp" />
+    <ClInclude Include="include\entt\meta\node.hpp" />
+    <ClInclude Include="include\entt\meta\pointer.hpp" />
+    <ClInclude Include="include\entt\meta\policy.hpp" />
+    <ClInclude Include="include\entt\meta\range.hpp" />
+    <ClInclude Include="include\entt\meta\resolve.hpp" />
+    <ClInclude Include="include\entt\meta\template.hpp" />
+    <ClInclude Include="include\entt\meta\type_traits.hpp" />
+    <ClInclude Include="include\entt\meta\utility.hpp" />
+    <ClInclude Include="include\entt\poly\fwd.hpp" />
+    <ClInclude Include="include\entt\poly\poly.hpp" />
+    <ClInclude Include="include\entt\process\fwd.hpp" />
+    <ClInclude Include="include\entt\process\process.hpp" />
+    <ClInclude Include="include\entt\process\scheduler.hpp" />
+    <ClInclude Include="include\entt\resource\cache.hpp" />
+    <ClInclude Include="include\entt\resource\fwd.hpp" />
+    <ClInclude Include="include\entt\resource\loader.hpp" />
+    <ClInclude Include="include\entt\resource\resource.hpp" />
+    <ClInclude Include="include\entt\signal\delegate.hpp" />
+    <ClInclude Include="include\entt\signal\dispatcher.hpp" />
+    <ClInclude Include="include\entt\signal\emitter.hpp" />
+    <ClInclude Include="include\entt\signal\fwd.hpp" />
+    <ClInclude Include="include\entt\signal\sigh.hpp" />
+    <ClInclude Include="include\entt\stl\functional.hpp" />
+    <ClInclude Include="include\entt\stl\iterator.hpp" />
+    <ClInclude Include="include\entt\stl\memory.hpp" />
+    <ClInclude Include="include\entt\tools.hpp" />
+    <ClInclude Include="include\entt\tools\davey.hpp" />
+    <ClInclude Include="src\sdk\SigManager.h" />
+    <ClInclude Include="src\sdk\game\world\actor\components\ActorOwnerComponent.hpp" />
+    <ClInclude Include="src\sdk\game\world\actor\components\ActorTypeComponent.hpp" />
+    <ClInclude Include="src\sdk\game\world\actor\EnableGetWeakRef.hpp" />
+    <ClInclude Include="src\sdk\game\world\actor\EntityContext.hpp" />
+    <ClInclude Include="src\sdk\game\world\actor\EntityId.hpp" />
+    <ClInclude Include="src\sdk\game\world\actor\EntityIdTraits.hpp" />
+    <ClInclude Include="src\sdk\game\world\actor\EntityRegistry.hpp" />
+    <ClInclude Include="src\sdk\game\world\level\dimension\Dimension.h" />
+    <ClInclude Include="src\sdk\game\world\level\Level.h" />
+    <ClInclude Include="src\features\event\KeyEvent.h" />
+    <ClInclude Include="src\features\event\MouseEvent.h" />
+    <ClInclude Include="src\features\modules\visual\ClickGui.h" />
+    <ClInclude Include="include\nes\event_dispatcher.hpp" />
+    <ClInclude Include="src\features\event\ModuleStateChangeEvent.h" />
+    <ClInclude Include="src\features\event\RenderEvent.h" />
+    <ClInclude Include="src\features\FeatureManager.h" />
+    <ClInclude Include="include\freetype\freetype.h" />
+    <ClInclude Include="include\freetype\ftadvanc.h" />
+    <ClInclude Include="include\freetype\ftbbox.h" />
+    <ClInclude Include="include\freetype\ftbdf.h" />
+    <ClInclude Include="include\freetype\ftbitmap.h" />
+    <ClInclude Include="include\freetype\ftbzip2.h" />
+    <ClInclude Include="include\freetype\ftcache.h" />
+    <ClInclude Include="include\freetype\ftchapters.h" />
+    <ClInclude Include="include\freetype\ftcid.h" />
+    <ClInclude Include="include\freetype\ftcolor.h" />
+    <ClInclude Include="include\freetype\ftdriver.h" />
+    <ClInclude Include="include\freetype\fterrdef.h" />
+    <ClInclude Include="include\freetype\fterrors.h" />
+    <ClInclude Include="include\freetype\ftfntfmt.h" />
+    <ClInclude Include="include\freetype\ftgasp.h" />
+    <ClInclude Include="include\freetype\ftglyph.h" />
+    <ClInclude Include="include\freetype\ftgxval.h" />
+    <ClInclude Include="include\freetype\ftgzip.h" />
+    <ClInclude Include="include\freetype\ftimage.h" />
+    <ClInclude Include="include\freetype\ftincrem.h" />
+    <ClInclude Include="include\freetype\ftlcdfil.h" />
+    <ClInclude Include="include\freetype\ftlist.h" />
+    <ClInclude Include="include\freetype\ftlogging.h" />
+    <ClInclude Include="include\freetype\ftlzw.h" />
+    <ClInclude Include="include\freetype\ftmac.h" />
+    <ClInclude Include="include\freetype\ftmm.h" />
+    <ClInclude Include="include\freetype\ftmodapi.h" />
+    <ClInclude Include="include\freetype\ftmoderr.h" />
+    <ClInclude Include="include\freetype\ftotval.h" />
+    <ClInclude Include="include\freetype\ftoutln.h" />
+    <ClInclude Include="include\freetype\ftparams.h" />
+    <ClInclude Include="include\freetype\ftpfr.h" />
+    <ClInclude Include="include\freetype\ftrender.h" />
+    <ClInclude Include="include\freetype\ftsizes.h" />
+    <ClInclude Include="include\freetype\ftsnames.h" />
+    <ClInclude Include="include\freetype\ftstroke.h" />
+    <ClInclude Include="include\freetype\ftsynth.h" />
+    <ClInclude Include="include\freetype\ftsystem.h" />
+    <ClInclude Include="include\freetype\fttrigon.h" />
+    <ClInclude Include="include\freetype\fttypes.h" />
+    <ClInclude Include="include\freetype\ftwinfnt.h" />
+    <ClInclude Include="include\freetype\otsvg.h" />
+    <ClInclude Include="include\freetype\t1tables.h" />
+    <ClInclude Include="include\freetype\ttnameid.h" />
+    <ClInclude Include="include\freetype\tttables.h" />
+    <ClInclude Include="include\freetype\tttags.h" />
+    <ClInclude Include="include\imgui\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="include\imgui\backends\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="include\imgui\backends\imgui_impl_win32.h" />
+    <ClInclude Include="include\imgui\imconfig.h" />
+    <ClInclude Include="include\imgui\imgui.h" />
+    <ClInclude Include="include\imgui\imgui_internal.h" />
+    <ClInclude Include="include\imgui\imstb_rectpack.h" />
+    <ClInclude Include="include\imgui\imstb_textedit.h" />
+    <ClInclude Include="include\imgui\imstb_truetype.h" />
+    <ClInclude Include="src\hook\WGLHook.h" />
+    <ClInclude Include="src\utils\ColorUtils.h" />
+    <ClInclude Include="src\utils\MathUtils.h" />
+    <ClInclude Include="src\utils\MemoryUtils.h" />
+    <ClInclude Include="src\features\modules\Setting.h" />
+    <ClInclude Include="src\sdk\game\world\actor\ActorType.hpp" />
+    <ClInclude Include="src\sdk\game\world\actor\ActorUniqueID.hpp" />
+    <ClInclude Include="src\sdk\game\world\actor\mob\player\gamemode\GameMode.h" />
+    <ClInclude Include="src\features\modules\ModuleManager.h" />
+    <ClInclude Include="src\features\event\Event.h" />
+    <ClInclude Include="src\features\event\NormalTickEvent.h" />
+    <ClInclude Include="src\utils\ActorUtils.h" />
+    <ClInclude Include="src\hook\ActorHook.h" />
+    <ClInclude Include="include\MinHook.h" />
+    <ClInclude Include="src\sdk\game\world\actor\mob\player\LocalPlayer.h" />
+    <ClInclude Include="src\sdk\game\world\actor\mob\player\Player.h" />
+    <ClInclude Include="src\sdk\game\world\actor\mob\Mob.h" />
+    <ClInclude Include="src\sdk\game\world\actor\Actor.h" />
+    <ClInclude Include="src\features\modules\combat\KillAura.h" />
+    <ClInclude Include="src\features\modules\Module.h" />
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="src\utils\Logger.h" />
+    <ClInclude Include="src\utils\optional_ref.hpp" />
+    <ClInclude Include="src\utils\RenderUtils.h" />
+    <ClInclude Include="src\utils\stdint.h" />
+    <ClInclude Include="src\utils\Utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\sdk\game\network\LoopbackPacketSender.cpp" />
+    <ClCompile Include="src\hook\PacketSendHook.cpp" />
+    <ClCompile Include="src\features\modules\player\NoFall.cpp" />
+    <ClCompile Include="src\features\modules\visual\Notifications.cpp" />
+    <ClCompile Include="src\features\modules\combat\Reach.cpp" />
+    <ClCompile Include="src\sdk\game\world\block\BlockLegacy.cpp" />
+    <ClCompile Include="src\sdk\game\world\block\Block.cpp" />
+    <ClCompile Include="src\sdk\game\world\block\BlockSource.cpp" />
+    <ClCompile Include="src\features\modules\player\Scaffold.cpp" />
+    <ClCompile Include="src\features\modules\visual\ChestEsp.cpp" />
+    <ClCompile Include="src\sdk\game\world\Minecraft.cpp" />
+    <ClCompile Include="src\hook\ClientInstanceHook.cpp" />
+    <ClCompile Include="src\sdk\game\ClientInstance.cpp" />
+    <ClCompile Include="src\sdk\SigManager.cpp" />
+    <ClCompile Include="src\sdk\game\world\level\dimension\Dimension.cpp" />
+    <ClCompile Include="src\sdk\game\world\level\Level.cpp" />
+    <ClCompile Include="src\features\modules\visual\ClickGui.cpp" />
+    <ClCompile Include="src\features\FeatureManager.cpp" />
+    <ClCompile Include="include\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="include\imgui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="include\imgui\imgui.cpp" />
+    <ClCompile Include="include\imgui\imgui_demo.cpp" />
+    <ClCompile Include="include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="include\imgui\imgui_tables.cpp" />
+    <ClCompile Include="include\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\hook\WGLHook.cpp" />
+    <ClCompile Include="src\utils\MathUtils.cpp" />
+    <ClCompile Include="src\utils\MemoryUtils.cpp" />
+    <ClCompile Include="src\features\modules\Setting.cpp" />
+    <ClCompile Include="src\sdk\game\world\actor\mob\player\gamemode\GameMode.cpp" />
+    <ClCompile Include="src\features\modules\ModuleManager.cpp" />
+    <ClCompile Include="src\utils\ActorUtils.cpp" />
+    <ClCompile Include="src\hook\ActorHook.cpp" />
+    <ClCompile Include="src\sdk\game\world\actor\mob\player\LocalPlayer.cpp" />
+    <ClCompile Include="src\sdk\game\world\actor\mob\player\Player.cpp" />
+    <ClCompile Include="src\sdk\game\world\actor\mob\Mob.cpp" />
+    <ClCompile Include="src\sdk\game\world\actor\Actor.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="src\features\modules\combat\KillAura.cpp" />
+    <ClCompile Include="src\features\modules\Module.cpp" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="include\imgui\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\libMinHook.x64.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="include\entt\natvis\config.natvis" />
+    <Natvis Include="include\entt\natvis\container.natvis" />
+    <Natvis Include="include\entt\natvis\core.natvis" />
+    <Natvis Include="include\entt\natvis\entity.natvis" />
+    <Natvis Include="include\entt\natvis\graph.natvis" />
+    <Natvis Include="include\entt\natvis\locator.natvis" />
+    <Natvis Include="include\entt\natvis\meta.natvis" />
+    <Natvis Include="include\entt\natvis\poly.natvis" />
+    <Natvis Include="include\entt\natvis\process.natvis" />
+    <Natvis Include="include\entt\natvis\resource.natvis" />
+    <Natvis Include="include\entt\natvis\signal.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\Inter-Bold.ttf" />
+    <Font Include="resources\Inter-Medium.ttf" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

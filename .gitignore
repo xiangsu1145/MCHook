@@ -1,0 +1,9 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+x64/
+*.exe
+*.dll
+
