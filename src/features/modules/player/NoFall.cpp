@@ -27,9 +27,12 @@ void NoFall::onPacketOutEvent(PacketOutEvent& event) {
 			auth->mInputFlags |= (InputData::StartGliding);
 			auth->mInputFlags |= InputData::Jumping;
 			auth->mInputFlags |= InputData::StartJumping;
-			auth->mPosDelta.y = -0.000001;
+			//auth->mPosDelta.y = -0.000001;
 		}
 		if (mMode.mValue == Mode::NoAuthPacket) {
+			auth->mInputFlags |= (InputData::StartGliding);
+			auth->mInputFlags |= InputData::Jumping;
+			auth->mInputFlags |= InputData::StartJumping;
 			if (!auth->mOnGround) {
 				event.cancel();
 			}

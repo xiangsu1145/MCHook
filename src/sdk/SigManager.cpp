@@ -171,21 +171,22 @@ void SigManager::init() {
         "48 8B C4 48 89 58 ?? 48 89 70 ?? 48 "
         "89 78 ?? 55 41 54 41 55 41 56 41 57 "
         "48 8D A8 ?? ?? ?? ?? 48 81 EC ?? ?? "
-        "?? ?? 0F 29 70 ?? 0F 29 78 ?? 48 8B "
-        "05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? "
-        "?? ?? ?? 4C 8B E1 48 89 4C 24", 
+        "?? ?? 0F 29 70 ?? 0F 29 78 ?? 44 0F "
+        "29 40 ?? 48 8B 05 ?? ?? ?? ?? 48 33 "
+        "C4 48 89 85 ?? ?? ?? ?? 4C 8B E1", 
         SignatureType::Direct);
 
     add_signature(SignatureID::LoopbackPacketSender_sendToServer,
-        "48 89 5C 24 ?? 57 48 81 EC ?? ?? ?? "
+        "48 89 5C 24 ?? 56 48 81 EC ?? ?? ?? "
         "?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 "
         "89 84 24 ?? ?? ?? ?? 0F B6 41",
         SignatureType::Direct);
-
+ 
     add_signature(SignatureID::MinecraftPackets_createPacket,
-        "48 89 5C 24 ?? 48 89 74 24 ?? 48 89 "
-        "7C 24 ?? 55 41 56 41 57 48 8B EC 48 "
-        "83 EC ?? 48 8B F1 48 89 4D",
+        "48 89 5C 24 ?? 48 89 74 24 ?? 55 57 "
+        "41 56 48 8B EC 48 83 EC ?? 48 8B 05 "
+        "?? ?? ?? ?? 48 33 C4 48 89 45 ?? 48 "
+        "8B F9 48 89 4D",
         SignatureType::Direct);
     
     //add_signature(SignatureID::Json_FastWriter_write,

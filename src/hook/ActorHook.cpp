@@ -13,7 +13,6 @@
 
 void __fastcall ActorHook::hookedNormalTick(Actor* self) {//这个fastcall的this指针是第一个参数，所以self就是Actor实例
     auto holder = nes::make_holder<NormalTickEvent>((LocalPlayer*)self);
-
 	gFeatureManager->mDispatcher->trigger(holder);
 
     originalNormalTick(self);

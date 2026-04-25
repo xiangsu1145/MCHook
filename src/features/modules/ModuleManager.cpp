@@ -18,7 +18,6 @@ void ModuleManager::init() {
 		mModules.emplace_back(std::make_shared<NoFall>());
 	}
 	{//Visual
-		Logger::info("ModuleManager Visual init");
 		mModules.emplace_back(std::make_shared<ClickGui>());
 		mModules.emplace_back(std::make_shared<Notifications>());
 	}

@@ -256,11 +256,6 @@
     <ClInclude Include="src\sdk\SigManager.h" />
     <ClInclude Include="src\sdk\game\world\actor\components\ActorOwnerComponent.hpp" />
     <ClInclude Include="src\sdk\game\world\actor\components\ActorTypeComponent.hpp" />
-    <ClInclude Include="src\sdk\game\world\actor\EnableGetWeakRef.hpp" />
-    <ClInclude Include="src\sdk\game\world\actor\EntityContext.hpp" />
-    <ClInclude Include="src\sdk\game\world\actor\EntityId.hpp" />
-    <ClInclude Include="src\sdk\game\world\actor\EntityIdTraits.hpp" />
-    <ClInclude Include="src\sdk\game\world\actor\EntityRegistry.hpp" />
     <ClInclude Include="src\sdk\game\world\level\dimension\Dimension.h" />
     <ClInclude Include="src\sdk\game\world\level\Level.h" />
     <ClInclude Include="src\features\event\KeyEvent.h" />

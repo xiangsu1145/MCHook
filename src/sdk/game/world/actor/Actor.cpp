@@ -57,6 +57,3 @@ float Actor::getFallDistance() {
 	return call(this);
 }
 
-EntityContext& Actor::getEntityContext() {
-	return MemoryUtils::member_at<EntityContext>(this, 0x8);
-}

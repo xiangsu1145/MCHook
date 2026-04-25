@@ -9,13 +9,13 @@ std::vector<Actor*> Level::getRuntimeActorList() {
 }
 
 void Level::forEachPlayer(std::function<bool(Player&)> callback) {
-    auto call = (void(__fastcall*)(Level*, std::function<bool(Player&)>)) (Main::baseAddress + 0x4330040);
+    auto call = (void(__fastcall*)(Level*, std::function<bool(Player&)>)) (vtable[259]);
     call(this, callback);
 }
 
 std::vector<Player*> Level::getPlayers() {
     std::vector<Player*> players;
-    reinterpret_cast<void(__fastcall*)(void*, std::function<bool(Player&)>)>(vtable[258])(
+    reinterpret_cast<void(__fastcall*)(void*, std::function<bool(Player&)>)>(vtable[259])(
         this, [&](Player& actor) -> bool {
             players.push_back(&actor);
             return true;

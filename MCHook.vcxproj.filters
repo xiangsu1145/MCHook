@@ -276,21 +276,6 @@
     <ClInclude Include="src\sdk\game\world\level\dimension\Dimension.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\sdk\game\world\actor\EnableGetWeakRef.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sdk\game\world\actor\EntityContext.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sdk\game\world\actor\EntityId.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sdk\game\world\actor\EntityIdTraits.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sdk\game\world\actor\EntityRegistry.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="src\sdk\game\world\actor\components\ActorTypeComponent.hpp">
       <Filter>头文件</Filter>
     </ClInclude>

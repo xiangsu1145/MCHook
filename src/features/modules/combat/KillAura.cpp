@@ -30,9 +30,9 @@ void KillAura::onTickEvent(NormalTickEvent& event) {
 	if (player->getLevel() == nullptr) {
 		return;
 	}
-
+	Logger::info("Killaura start");
 	auto actors = player->getLevel()->getPlayers();
-
+	Logger::info("actors count: %d my pos y%f", actors.size(),player->getPosition()->y);
 	static int64_t lastattack = 0;
 	int64_t now = NOW;
 	float aps = mAPS.getRandom();
