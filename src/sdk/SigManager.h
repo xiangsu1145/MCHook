@@ -10,11 +10,13 @@ enum class SignatureID {
     //Actor class
 
     Actor_getPosition,
+    Actor_setPosition,
     Actor_getLevel,
     Actor_normalTick,
     Actor_getRegion,
     Actor_getDimension,
     Actor_getFallDistance,
+    Actor_jumpFromGround,
 
     //Player class
 
@@ -54,14 +56,12 @@ class SignatureInfo {
 public:
     SignatureID mId;
     SignatureType mType;
-    std::vector<std::string> mPatterns; // 改为支持多个特征码
+    std::vector<std::string> mPatterns;
     int mOffset = 0;
 
-    // 适配单特征码
     SignatureInfo(SignatureID id, SignatureType type, std::string pattern, int offset = 0)
         : mId(id), mType(type), mPatterns({ std::move(pattern) }), mOffset(offset) {}
 
-    // 适配多特征码 (使用 initializer_list)
     SignatureInfo(SignatureID id, SignatureType type, std::initializer_list<std::string> patterns, int offset = 0)
         : mId(id), mType(type), mPatterns(patterns), mOffset(offset) {}
 };

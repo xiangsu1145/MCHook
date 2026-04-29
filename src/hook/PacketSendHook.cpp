@@ -7,8 +7,10 @@
 #include "src/sdk/game/network/packet/Packet.h"
 #include "src/features/event/PacketOutEvent.h"
 #include "src/features/FeatureManager.h"
+#include "src/sdk/game/network/LoopbackPacketSender.h"
 
 void PacketSendHook::hookSendToServer(LoopbackPacketSender* thiz, Packet* packet) {
+	LoopbackPacketSender::instance = thiz;
 	auto holder = nes::make_holder<PacketOutEvent>(packet);
 	gFeatureManager->mDispatcher->trigger(holder);
 	if (holder->isCanceled()) {

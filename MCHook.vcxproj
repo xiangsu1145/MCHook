@@ -144,6 +144,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\sdk\game\network\MinecraftPackets.h" />
+    <ClInclude Include="src\features\modules\combat\InfiniteAura.h" />
+    <ClInclude Include="src\features\modules\misc\Disabler.h" />
     <ClInclude Include="include\android\View.h" />
     <ClInclude Include="include\magic_enum\magic_enum.hpp" />
     <ClInclude Include="include\magic_enum\magic_enum_all.hpp" />
@@ -154,6 +157,7 @@
     <ClInclude Include="include\magic_enum\magic_enum_iostream.hpp" />
     <ClInclude Include="include\magic_enum\magic_enum_switch.hpp" />
     <ClInclude Include="include\magic_enum\magic_enum_utility.hpp" />
+    <ClInclude Include="src\features\modules\movement\Speed.h" />
     <ClInclude Include="src\features\event\PacketOutEvent.h" />
     <ClInclude Include="src\sdk\game\network\LoopbackPacketSender.h" />
     <ClInclude Include="src\hook\PacketSendHook.h" />
@@ -165,6 +169,7 @@
     <ClInclude Include="src\sdk\game\network\packet\IPacketHandlerDispatcher.h" />
     <ClInclude Include="src\sdk\game\network\packet\Packet.h" />
     <ClInclude Include="src\sdk\game\network\packet\PlayerAuthInputPacket.h" />
+    <ClInclude Include="src\sdk\game\world\actor\components\StateVectorComponent.h" />
     <ClInclude Include="src\sdk\game\world\block\BlockLegacy.h" />
     <ClInclude Include="src\sdk\game\world\block\Block.h" />
     <ClInclude Include="src\sdk\game\world\block\BlockSource.h" />
@@ -348,6 +353,10 @@
     <ClInclude Include="src\utils\Utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\sdk\game\network\MinecraftPackets.cpp" />
+    <ClCompile Include="src\features\modules\combat\InfiniteAura.cpp" />
+    <ClCompile Include="src\features\modules\misc\Disabler.cpp" />
+    <ClCompile Include="src\features\modules\movement\Speed.cpp" />
     <ClCompile Include="src\sdk\game\network\LoopbackPacketSender.cpp" />
     <ClCompile Include="src\hook\PacketSendHook.cpp" />
     <ClCompile Include="src\features\modules\player\NoFall.cpp" />

@@ -2,7 +2,7 @@
 
 #include "../Module.h"
 
-class NoFall : public Module
+class NoFall : public ModuleBase<NoFall>
 {
 public:
 	enum class Mode {
@@ -17,7 +17,7 @@ public:
 		"NoAuthPacket",
 		"Blink"
 		});
-	NoFall() : Module("NoFall", "Prevents fall damage", ModuleCategory::Player, 'N', false)
+	NoFall() : ModuleBase("NoFall", "Prevents fall damage", ModuleCategory::Player, 'N', false)
 	{
 		addSettings(&mMode, &mFallDistanceMin, &mFallDistanceMax);
 	}

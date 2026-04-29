@@ -1,18 +1,22 @@
 #include "ModuleManager.h"
 
 #include "combat/KillAura.h"
+#include "combat/InfiniteAura.h"
+#include "movement/Speed.h"
 #include "player/NoFall.h"
 #include "visual/ClickGui.h"
 #include "visual/Notifications.h"
+#include "misc/Disabler.h"
 #include "src/utils/Logger.h"
 
 
 void ModuleManager::init() {
 	{//Combat
 		mModules.emplace_back(std::make_shared<KillAura>());
+		mModules.emplace_back(std::make_shared<InfiniteAura>());
 	}
 	{//Movement
-		
+		mModules.emplace_back(std::make_shared<Speed>());
 	}
 	{//Player
 		mModules.emplace_back(std::make_shared<NoFall>());
@@ -22,7 +26,7 @@ void ModuleManager::init() {
 		mModules.emplace_back(std::make_shared<Notifications>());
 	}
 	{//Misc
-
+		mModules.emplace_back(std::make_shared<Disabler>());
 	}
 }
 

@@ -2,9 +2,9 @@
 
 #include "../Module.h"
 
-class Reach : public Module{
+class Reach : public ModuleBase<Reach>{
 public:
-	Reach() : Module("Reach", "", ModuleCategory::Combat, 0, false) {
+	Reach() : ModuleBase("Reach", "", ModuleCategory::Combat, 0, false) {
 	
 	}
 

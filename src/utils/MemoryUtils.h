@@ -21,7 +21,6 @@ private:
     static constexpr bool is_raw_pointer_v = is_raw_pointer<T>::value;
 
 public:
-    // 普通类型 返回引用
     template<typename T>
     static std::enable_if_t<!is_raw_pointer_v<T> && !is_shared_ptr_v<T>, T&>
         member_at(void* base, uintptr_t offset) {
@@ -29,7 +28,6 @@ public:
         return *reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(base) + offset);
     }
 
-    // 指针/智能指针 返回值
     template<typename T>
     static std::enable_if_t<is_raw_pointer_v<T> || is_shared_ptr_v<T>, T>
         member_at(void* base, uintptr_t offset) {

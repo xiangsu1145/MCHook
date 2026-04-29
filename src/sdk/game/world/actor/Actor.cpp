@@ -14,6 +14,32 @@ Vec3* Actor::getPosition() {
 	return call(this);
 }
 
+StateVectorComponent* Actor::getStateVector() {
+	auto result = SigManager::get(SignatureID::Actor_getPosition);
+	if (!result) {
+		Logger::error("Failed to find Actor::getPostion");
+	}
+	auto call = (StateVectorComponent * (__fastcall*)(void*)) (*result);
+	return call(this);
+}
+
+Vec3* Actor::getPositionPrev() {
+	return &getStateVector()->mPosPrev;
+}
+
+Vec3* Actor::getPosDelta() {
+	return &getStateVector()->mPosDelta;
+}
+
+void Actor::setPosition(Vec3& pos) {
+	auto result = SigManager::get(SignatureID::Actor_setPosition);
+	if (!result) {
+		Logger::error("Failed to find Actor::setPostion");
+	}
+	auto call = (void(__fastcall*)(void*, Vec3&)) (*result);
+	return call(this, pos);
+}
+
 float Actor::distanceTo(Actor* actor) {
 	auto pos1 = this->getPosition();
 	auto pos2 = actor->getPosition();

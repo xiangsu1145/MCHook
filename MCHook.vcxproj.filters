@@ -621,6 +621,21 @@
     <ClInclude Include="include\magic_enum\magic_enum_utility.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\features\modules\movement\Speed.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sdk\game\world\actor\components\StateVectorComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\features\modules\misc\Disabler.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\features\modules\combat\InfiniteAura.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sdk\game\network\MinecraftPackets.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -744,6 +759,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\sdk\game\network\LoopbackPacketSender.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\features\modules\movement\Speed.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\features\modules\misc\Disabler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\features\modules\combat\InfiniteAura.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdk\game\network\MinecraftPackets.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

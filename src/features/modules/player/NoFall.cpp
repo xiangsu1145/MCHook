@@ -17,7 +17,6 @@ void NoFall::onPacketOutEvent(PacketOutEvent& event) {
 	if (event.mPacket->getId() == MinecraftPacketIds::PlayerAuthInputPacket) {
 		auto auth = event.getPacket<PlayerAuthInputPacket>();
 		auto player = ClientInstance::get()->getLocalPlayer();
-		player->getFallDistance();
 		
 		if (player->getFallDistance() < mFallDistanceMin.mValue || player->getFallDistance() > mFallDistanceMax.mValue) {
 			return;
@@ -27,12 +26,9 @@ void NoFall::onPacketOutEvent(PacketOutEvent& event) {
 			auth->mInputFlags |= (InputData::StartGliding);
 			auth->mInputFlags |= InputData::Jumping;
 			auth->mInputFlags |= InputData::StartJumping;
-			//auth->mPosDelta.y = -0.000001;
+			auth->mPosDelta.y = -0.000001;
 		}
 		if (mMode.mValue == Mode::NoAuthPacket) {
-			auth->mInputFlags |= (InputData::StartGliding);
-			auth->mInputFlags |= InputData::Jumping;
-			auth->mInputFlags |= InputData::StartJumping;
 			if (!auth->mOnGround) {
 				event.cancel();
 			}
