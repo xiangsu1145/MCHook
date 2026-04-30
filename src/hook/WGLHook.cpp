@@ -92,6 +92,34 @@ LRESULT CALLBACK hookedWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 typedef BOOL(WINAPI* wglSwapBuffers_t)(HDC);
 static wglSwapBuffers_t originalSwapBuffers = nullptr;
 
+ImFont* gFontNormal = nullptr;
+ImFont* gFontBold = nullptr;
+
+// Font resource IDs - auto-assigned by VS for <Font> items
+#define IDR_INTER_MEDIUM 1
+#define IDR_INTER_BOLD   2
+
+static void loadFonts() {
+    ImGuiIO& io = ImGui::GetIO();
+    io.Fonts->Clear();
+
+    char dllPath[MAX_PATH];
+    HMODULE hModule = GetModuleHandleA("MCHook.dll");
+    if (!hModule) hModule = GetModuleHandleA(NULL);
+    GetModuleFileNameA(hModule, dllPath, MAX_PATH);
+    char* p = strrchr(dllPath, '\\');
+    if (p) *p = '\0';
+
+    char fontPath[MAX_PATH];
+    snprintf(fontPath, sizeof(fontPath), "%s\\resources\\Inter-Medium.ttf", dllPath);
+    gFontNormal = io.Fonts->AddFontFromFileTTF(fontPath, 16.0f);
+
+    snprintf(fontPath, sizeof(fontPath), "%s\\resources\\Inter-Bold.ttf", dllPath);
+    gFontBold = io.Fonts->AddFontFromFileTTF(fontPath, 16.0f);
+
+    io.Fonts->Build();
+}
+
 BOOL WINAPI hookedSwapBuffers(HDC hDc) {
     if (!WGLHook::mInitialized) {
         ImGui::CreateContext();
@@ -104,6 +132,8 @@ BOOL WINAPI hookedSwapBuffers(HDC hDc) {
             WGLHook::mHwnd, GWLP_WNDPROC, (LONG_PTR)hookedWndProc
         );
 
+        loadFonts();
+
         WGLHook::mInitialized = true;
     }
 
@@ -115,8 +145,6 @@ BOOL WINAPI hookedSwapBuffers(HDC hDc) {
 
 	auto holder = nes::make_holder<RenderEvent>(event);
 	gFeatureManager->mDispatcher->trigger(holder);
-
-    ImGui::ShowDemoWindow();
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

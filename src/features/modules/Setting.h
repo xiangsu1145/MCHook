@@ -115,6 +115,9 @@ public:
     float mValueMin = 0.0f;
     float mValueMax = 0.0f;
     float mStep = 0.0f;
+    float sliderEaseMax = 0.f;
+    bool isDraggingMin = false;
+    bool isDraggingMax = false;
 
     RangeSetting(std::string name, std::string description, float valuemin,float valuemax, float min, float max, float step)
         : Setting(std::move(name), std::move(description), SettingType::Range), mValueMin(valuemin), mValueMax(valuemax), mMin(min), mMax(max), mStep(step)
@@ -229,6 +232,27 @@ public:
 
     const std::vector<std::string>* getEnumValues() const override {
         return &mValues;
+    }
+};
+
+class StringSetting : public Setting
+{
+public:
+    std::string mValue;
+
+    StringSetting(std::string name, std::string description, std::string value)
+        : Setting(std::move(name), std::move(description), SettingType::String), mValue(std::move(value))
+    {
+    }
+
+    void setValue(std::string value)
+    {
+        mValue = std::move(value);
+    }
+
+    std::string getName()
+    {
+        return mName;
     }
 };
 

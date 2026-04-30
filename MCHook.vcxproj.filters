@@ -639,6 +639,9 @@
     <ClInclude Include="src\sdk\game\world\actor\components\ActorRotationComponent.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\features\modules\movement\Fly.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -774,6 +777,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\sdk\game\network\MinecraftPackets.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\features\modules\movement\Fly.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

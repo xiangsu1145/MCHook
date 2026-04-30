@@ -3,6 +3,7 @@
 #include "combat/KillAura.h"
 #include "combat/InfiniteAura.h"
 #include "movement/Speed.h"
+#include "movement/Fly.h"
 #include "player/NoFall.h"
 #include "visual/ClickGui.h"
 #include "visual/Notifications.h"
@@ -17,6 +18,7 @@ void ModuleManager::init() {
 	}
 	{//Movement
 		mModules.emplace_back(std::make_shared<Speed>());
+		mModules.emplace_back(std::make_shared<Fly>());
 	}
 	{//Player
 		mModules.emplace_back(std::make_shared<NoFall>());

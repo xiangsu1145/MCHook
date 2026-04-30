@@ -10,3 +10,6 @@ public:
     static HWND mHwnd;
     static WNDPROC mOriginalWndProc;
 };
+
+extern ImFont* gFontNormal;
+extern ImFont* gFontBold;

@@ -27,6 +27,7 @@ public:
 	ModuleCategory mCategory;
 	bool mEnabled = false;
 	int mKey;
+	float mExpandAnim = 0.f;
 public:
 	void toggle() {
 		setEnabled(!mEnabled);
