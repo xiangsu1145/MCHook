@@ -22,6 +22,11 @@ async function adminLogin() {
   const username = document.getElementById('admin-username').value;
   const password = document.getElementById('admin-password').value;
 
+  if (!username || !password) {
+    document.getElementById('admin-error').textContent = '请填写所有字段';
+    return;
+  }
+
   try {
     const res = await fetch('/api/auth/login', {
       method: 'POST',
@@ -36,7 +41,7 @@ async function adminLogin() {
     }
 
     if (!data.user.isAdmin) {
-      document.getElementById('admin-error').textContent = 'Admin access required';
+      window.location.href = '/user';
       return;
     }
 
@@ -46,7 +51,7 @@ async function adminLogin() {
     localStorage.setItem('mchook_user', JSON.stringify(user));
     checkAuth();
   } catch (err) {
-    document.getElementById('admin-error').textContent = 'Connection error';
+    document.getElementById('admin-error').textContent = '连接错误';
   }
 }
 
@@ -55,9 +60,7 @@ function logout() {
   user = null;
   localStorage.removeItem('mchook_token');
   localStorage.removeItem('mchook_user');
-  document.getElementById('admin-username').value = '';
-  document.getElementById('admin-password').value = '';
-  checkAuth();
+  window.location.href = '/';
 }
 
 async function loadData() {
@@ -72,31 +75,34 @@ async function loadKeys() {
     const keys = await res.json();
 
     const tbody = document.getElementById('keys-table');
+    if (keys.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#999;">暂无密钥</td></tr>';
+      return;
+    }
     tbody.innerHTML = keys.map(k => {
       let expiresText = '-';
-      let statusClass = '';
       if (k.expiresAt) {
         const exp = new Date(k.expiresAt);
         expiresText = exp.toLocaleDateString();
         if (exp < new Date()) {
-          expiresText += ' <span class="status-expired">(Expired)</span>';
+          expiresText += ' <span class="status-expired">(已过期)</span>';
         }
       } else {
-        expiresText = '<span class="status-online">Never</span>';
+        expiresText = '<span class="status-online">永久</span>';
       }
 
       return `
         <tr>
           <td><code>${k.key}</code></td>
-          <td><span class="badge badge-${k.type}">${k.type}</span></td>
+          <td><span class="badge badge-${k.type}">${k.type === 'trial' ? '试用' : '永久'}</span></td>
           <td>${expiresText}</td>
-          <td>${k.usedByUsername || '<span class="badge badge-unused">Unused</span>'}</td>
-          <td><button class="action-btn" onclick="deleteKey(${k.id})">Delete</button></td>
+          <td>${k.usedByUsername || '<span class="badge badge-unused">未使用</span>'}</td>
+          <td><button class="action-btn" onclick="deleteKey(${k.id})">删除</button></td>
         </tr>
       `;
     }).join('');
   } catch (err) {
-    console.error('Failed to load keys:', err);
+    console.error('加载密钥失败:', err);
   }
 }
 
@@ -108,17 +114,22 @@ async function loadUsers() {
     const users = await res.json();
 
     const tbody = document.getElementById('users-table');
+    if (users.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#999;">暂无用户</td></tr>';
+      return;
+    }
     tbody.innerHTML = users.map(u => `
       <tr>
         <td>${u.id}</td>
         <td>${u.username}</td>
-        <td><span class="badge badge-${u.isAdmin ? 'admin' : 'user'}">${u.isAdmin ? 'Admin' : 'User'}</span></td>
+        <td><span class="badge badge-${u.isAdmin ? 'admin' : 'user'}">${u.isAdmin ? '管理员' : '用户'}</span></td>
+        <td><span style="color:${u.activated ? '#27ae60' : '#e74c3c'};">${u.activated ? '已激活' : '未激活'}</span></td>
         <td>${new Date(u.createdAt).toLocaleDateString()}</td>
-        <td><button class="action-btn" onclick="deleteUser(${u.id})">Delete</button></td>
+        <td><button class="action-btn" onclick="deleteUser(${u.id})">删除</button></td>
       </tr>
     `).join('');
   } catch (err) {
-    console.error('Failed to load users:', err);
+    console.error('加载用户失败:', err);
   }
 }
 
@@ -127,7 +138,7 @@ async function generateKey() {
   const days = type === 'trial' ? parseInt(document.getElementById('key-days').value) : null;
 
   if (type === 'trial' && (!days || days < 1)) {
-    alert('Please enter valid days for trial key');
+    alert('请输入有效天数');
     return;
   }
 
@@ -142,15 +153,15 @@ async function generateKey() {
     });
 
     const key = await res.json();
-    document.getElementById('generated-key').textContent = `Generated: ${key.key}`;
+    document.getElementById('generated-key').textContent = `已生成：${key.key}`;
     loadKeys();
   } catch (err) {
-    alert('Failed to generate key');
+    alert('生成密钥失败');
   }
 }
 
 async function deleteKey(id) {
-  if (!confirm('Delete this key?')) return;
+  if (!confirm('确定删除此密钥？')) return;
 
   try {
     await fetch(`/api/admin/keys/${id}`, {
@@ -159,12 +170,12 @@ async function deleteKey(id) {
     });
     loadKeys();
   } catch (err) {
-    alert('Failed to delete key');
+    alert('删除失败');
   }
 }
 
 async function deleteUser(id) {
-  if (!confirm('Delete this user?')) return;
+  if (!confirm('确定删除此用户？')) return;
 
   try {
     await fetch(`/api/admin/users/${id}`, {
@@ -173,7 +184,7 @@ async function deleteUser(id) {
     });
     loadUsers();
   } catch (err) {
-    alert('Failed to delete user');
+    alert('删除失败');
   }
 }
 

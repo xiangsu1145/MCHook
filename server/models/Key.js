@@ -1,4 +1,4 @@
-const db = require('../config/database');
+const { getDatabase, saveDatabase } = require('../config/database');
 
 function generateKey() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -12,6 +12,7 @@ function generateKey() {
 
 class Key {
   static create(type, days = null) {
+    const db = getDatabase();
     const key = generateKey();
     let expiresAt = null;
     if (type === 'trial' && days) {
@@ -19,39 +20,62 @@ class Key {
       date.setDate(date.getDate() + days);
       expiresAt = date.toISOString();
     }
-    const stmt = db.prepare('INSERT INTO keys (key, type, expiresAt) VALUES (?, ?, ?)');
-    const result = stmt.run(key, type, expiresAt);
-    return { id: result.lastInsertRowid, key, type, expiresAt };
+    db.run('INSERT INTO keys (key, type, expiresAt) VALUES (?, ?, ?)', [key, type, expiresAt]);
+    saveDatabase();
+    const result = db.exec('SELECT last_insert_rowid() as id');
+    return { id: result[0].values[0][0], key, type, expiresAt };
   }
 
   static findByKey(key) {
-    const stmt = db.prepare('SELECT * FROM keys WHERE key = ?');
-    return stmt.get(key);
+    const db = getDatabase();
+    const result = db.exec('SELECT * FROM keys WHERE key = ?', [key]);
+    if (result.length === 0 || result[0].values.length === 0) return null;
+    const columns = result[0].columns;
+    const values = result[0].values[0];
+    const k = {};
+    columns.forEach((col, i) => k[col] = values[i]);
+    return k;
   }
 
   static getAll() {
-    const stmt = db.prepare(`
-      SELECT k.*, u.username as usedByUsername
+    const db = getDatabase();
+    const result = db.exec(`
+      SELECT k.id, k.key, k.type, k.expiresAt, k.usedBy, k.createdAt, u.username as usedByUsername
       FROM keys k
       LEFT JOIN users u ON k.usedBy = u.id
       ORDER BY k.createdAt DESC
     `);
-    return stmt.all();
+    if (result.length === 0) return [];
+    const columns = result[0].columns;
+    return result[0].values.map(values => {
+      const k = {};
+      columns.forEach((col, i) => k[col] = values[i]);
+      return k;
+    });
   }
 
   static getUnused() {
-    const stmt = db.prepare('SELECT * FROM keys WHERE usedBy IS NULL ORDER BY createdAt DESC');
-    return stmt.all();
+    const db = getDatabase();
+    const result = db.exec('SELECT * FROM keys WHERE usedBy IS NULL ORDER BY createdAt DESC');
+    if (result.length === 0) return [];
+    const columns = result[0].columns;
+    return result[0].values.map(values => {
+      const k = {};
+      columns.forEach((col, i) => k[col] = values[i]);
+      return k;
+    });
   }
 
   static activate(key, userId) {
-    const stmt = db.prepare('UPDATE keys SET usedBy = ? WHERE key = ? AND usedBy IS NULL');
-    return stmt.run(userId, key);
+    const db = getDatabase();
+    db.run('UPDATE keys SET usedBy = ? WHERE key = ? AND usedBy IS NULL', [userId, key]);
+    saveDatabase();
   }
 
   static delete(id) {
-    const stmt = db.prepare('DELETE FROM keys WHERE id = ?');
-    return stmt.run(id);
+    const db = getDatabase();
+    db.run('DELETE FROM keys WHERE id = ?', [id]);
+    saveDatabase();
   }
 
   static isValid(key) {

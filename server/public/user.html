@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCHook - 用户中心</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .user-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      width: 600px;
+      max-width: 95vw;
+    }
+    .user-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #eee;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .user-avatar {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .stat-box {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .stat-label {
+      color: #888;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+    .stat-value {
+      color: #333;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .stat-value.success { color: #27ae60; }
+    .stat-value.danger { color: #e74c3c; }
+    .stat-value.warning { color: #f39c12; }
+    .activate-box {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .activate-box h3 {
+      margin-bottom: 15px;
+      color: #555;
+    }
+    .key-display {
+      font-family: monospace;
+      background: #e9ecef;
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-size: 16px;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <div class="user-card">
+    <div class="user-header">
+      <div class="user-info">
+        <div class="user-avatar" id="avatar"></div>
+        <div>
+          <h2 id="username" style="margin:0;color:#333;"></h2>
+          <span id="user-type" style="color:#888;font-size:13px;"></span>
+        </div>
+      </div>
+      <button onclick="logout()" style="background:#666;width:auto;padding:8px 16px;font-size:13px;">退出登录</button>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-label">账号状态</div>
+        <div class="stat-value" id="status"></div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">密钥类型</div>
+        <div class="stat-value" id="key-type"></div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">到期时间</div>
+        <div class="stat-value" id="expires"></div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">注册时间</div>
+        <div class="stat-value" id="created"></div>
+      </div>
+    </div>
+
+    <div class="activate-box" id="activate-section">
+      <h3>激活账号</h3>
+      <div class="form-group">
+        <input type="text" id="activate-key" placeholder="输入密钥" style="text-align:center;">
+      </div>
+      <button onclick="activate()" style="width:100%;background:#27ae60;">激活</button>
+      <div id="msg" style="margin-top:10px;text-align:center;"></div>
+    </div>
+  </div>
+
+  <script>
+    let token = localStorage.getItem('mchook_token');
+
+    if (!token) {
+      window.location.href = '/';
+    }
+
+    async function loadUser() {
+      try {
+        const res = await fetch('/api/auth/me', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!res.ok) {
+          window.location.href = '/';
+          return;
+        }
+        const user = await res.json();
+
+        document.getElementById('username').textContent = user.username;
+        document.getElementById('avatar').textContent = user.username.charAt(0).toUpperCase();
+        document.getElementById('user-type').textContent = user.isAdmin ? '管理员' : '普通用户';
+
+        if (user.activated) {
+          document.getElementById('status').textContent = '已激活';
+          document.getElementById('status').className = 'stat-value success';
+          document.getElementById('activate-section').style.display = 'none';
+        } else {
+          document.getElementById('status').textContent = '未激活';
+          document.getElementById('status').className = 'stat-value danger';
+        }
+
+        document.getElementById('key-type').textContent = user.keyType || '-';
+        document.getElementById('expires').textContent = user.expiresAt || '永久';
+        document.getElementById('created').textContent = new Date(user.createdAt).toLocaleDateString();
+
+      } catch (err) {
+        console.error(err);
+        window.location.href = '/';
+      }
+    }
+
+    async function activate() {
+      const key = document.getElementById('activate-key').value;
+      if (!key) {
+        showMsg('请输入密钥', 'error');
+        return;
+      }
+      try {
+        const res = await fetch('/api/auth/activate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ key })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showMsg(data.error, 'error');
+          return;
+        }
+        showMsg('激活成功！', 'success');
+        document.getElementById('activate-key').value = '';
+        setTimeout(() => loadUser(), 1000);
+      } catch (err) {
+        showMsg('连接错误', 'error');
+      }
+    }
+
+    function showMsg(text, type) {
+      const el = document.getElementById('msg');
+      el.textContent = text;
+      el.style.color = type === 'error' ? '#e74c3c' : '#27ae60';
+      setTimeout(() => { el.textContent = ''; }, 3000);
+    }
+
+    function logout() {
+      localStorage.removeItem('mchook_token');
+      localStorage.removeItem('mchook_user');
+      window.location.href = '/';
+    }
+
+    loadUser();
+  </script>
+</body>
+</html>

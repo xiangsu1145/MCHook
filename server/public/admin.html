@@ -1,72 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MCHook - Admin Panel</title>
+  <title>MCHook - 管理面板</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <div class="card">
     <div class="nav-bar">
-      <h2>Admin Panel</h2>
-      <button onclick="logout()" style="background: #666;">Logout</button>
+      <h2>管理面板</h2>
+      <button onclick="logout()" style="background: #666;">退出登录</button>
     </div>
 
     <div id="login-section" class="hidden">
+      <h1 style="margin-bottom:20px;">管理员登录</h1>
       <div class="form-group">
-        <label>Username</label>
-        <input type="text" id="admin-username" placeholder="Username">
+        <label>用户名</label>
+        <input type="text" id="admin-username" placeholder="输入用户名">
       </div>
       <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="admin-password" placeholder="Password">
+        <label>密码</label>
+        <input type="password" id="admin-password" placeholder="输入密码">
       </div>
-      <button onclick="adminLogin()">Login</button>
+      <button onclick="adminLogin()">登录</button>
       <div id="admin-error" class="error"></div>
     </div>
 
     <div id="admin-section" class="hidden">
-      <h3 class="section-title">Generate Key</h3>
+      <h3 class="section-title">生成密钥</h3>
       <div class="grid-2">
         <div class="form-group">
-          <label>Key Type</label>
-          <select id="key-type" style="width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;">
-            <option value="trial">Trial</option>
-            <option value="permanent">Permanent</option>
+          <label>密钥类型</label>
+          <select id="key-type" style="width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;" onchange="toggleDaysInput()">
+            <option value="permanent">永久</option>
+            <option value="trial">试用</option>
           </select>
         </div>
-        <div class="form-group">
-          <label>Days (for trial)</label>
+        <div class="form-group" id="days-group">
+          <label>天数（试用）</label>
           <input type="number" id="key-days" value="7" min="1" max="365">
         </div>
       </div>
-      <button onclick="generateKey()">Generate Key</button>
+      <button onclick="generateKey()">生成密钥</button>
       <div id="generated-key" class="success" style="margin-top:15px;font-size:16px;font-weight:600;"></div>
 
-      <h3 class="section-title">Keys</h3>
+      <h3 class="section-title">密钥管理</h3>
       <table>
         <thead>
           <tr>
-            <th>Key</th>
-            <th>Type</th>
-            <th>Expires</th>
-            <th>Used By</th>
-            <th>Action</th>
+            <th>密钥</th>
+            <th>类型</th>
+            <th>过期时间</th>
+            <th>使用者</th>
+            <th>操作</th>
           </tr>
         </thead>
         <tbody id="keys-table"></tbody>
       </table>
 
-      <h3 class="section-title">Users</h3>
+      <h3 class="section-title">用户管理</h3>
       <table>
         <thead>
           <tr>
             <th>ID</th>
-            <th>Username</th>
-            <th>Role</th>
-            <th>Created</th>
-            <th>Action</th>
+            <th>用户名</th>
+            <th>角色</th>
+            <th>激活状态</th>
+            <th>注册时间</th>
+            <th>操作</th>
           </tr>
         </thead>
         <tbody id="users-table"></tbody>
@@ -74,6 +76,13 @@
     </div>
   </div>
 
+  <script>
+    function toggleDaysInput() {
+      const type = document.getElementById('key-type').value;
+      document.getElementById('days-group').style.display = type === 'trial' ? 'block' : 'none';
+    }
+    toggleDaysInput();
+  </script>
   <script src="/js/admin.js"></script>
 </body>
 </html>

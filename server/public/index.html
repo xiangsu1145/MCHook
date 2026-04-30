@@ -1,48 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MCHook - Login</title>
+  <title>MCHook - 用户中心</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <div class="container">
     <h1>MCHook</h1>
     <div class="tabs">
-      <button class="tab active" data-tab="login">Login</button>
-      <button class="tab" data-tab="register">Register</button>
+      <button class="tab active" data-tab="login">登录</button>
+      <button class="tab" data-tab="register">注册</button>
     </div>
 
     <div id="login-form">
       <div class="form-group">
-        <label>Username</label>
-        <input type="text" id="login-username" placeholder="Enter username">
+        <label>用户名</label>
+        <input type="text" id="login-username" placeholder="输入用户名">
       </div>
       <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="login-password" placeholder="Enter password">
+        <label>密码</label>
+        <input type="password" id="login-password" placeholder="输入密码">
       </div>
-      <button onclick="login()">Login</button>
+      <button onclick="login()">登录</button>
       <div id="login-error" class="error hidden"></div>
     </div>
 
     <div id="register-form" class="hidden">
       <div class="form-group">
-        <label>Username</label>
-        <input type="text" id="reg-username" placeholder="Enter username">
+        <label>用户名</label>
+        <input type="text" id="reg-username" placeholder="输入用户名">
       </div>
       <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="reg-password" placeholder="Enter password">
+        <label>密码</label>
+        <input type="password" id="reg-password" placeholder="输入密码">
       </div>
-      <div class="form-group">
-        <label>License Key</label>
-        <input type="text" id="reg-key" placeholder="Enter license key">
-      </div>
-      <button onclick="register()">Register</button>
+      <button onclick="register()">注册</button>
       <div id="reg-error" class="error hidden"></div>
       <div id="reg-success" class="success hidden"></div>
+    </div>
+
+    <div id="user-section" class="hidden" style="text-align:center;">
+      <h2 style="color:#333;margin-bottom:25px;">欢迎，<span id="username-display"></span></h2>
+
+      <div style="background:#f8f9fa;padding:20px;border-radius:12px;margin-bottom:20px;">
+        <h3 style="margin-bottom:15px;color:#555;">账号状态</h3>
+        <div id="activation-status" style="font-size:16px;margin-bottom:15px;"></div>
+        <div id="key-input-group" class="form-group" style="margin-bottom:10px;">
+          <input type="text" id="activate-key" placeholder="输入密钥" style="text-align:center;">
+        </div>
+        <button onclick="activate()" style="background:#27ae60;">激活账号</button>
+        <div id="activate-error" class="error hidden"></div>
+        <div id="activate-success" class="success hidden"></div>
+      </div>
+
+      <button onclick="logout()" style="background:#666;width:auto;padding:10px 30px;">退出登录</button>
     </div>
   </div>
 
