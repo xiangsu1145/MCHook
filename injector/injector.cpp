@@ -91,13 +91,11 @@ int main() {
     std::cout << "[INFO] Looking for Minecraft..." << std::endl;
 
     DWORD pid = 0;
-    if (!FindProcessByName("javaw.exe", pid)) {
-        if (!FindProcessByName("java.exe", pid)) {
-            std::cerr << "[ERROR] Minecraft not found!" << std::endl;
-            std::cout << "Press Enter to exit..." << std::endl;
-            std::cin.get();
-            return 1;
-        }
+    if (!FindProcessByName("Minecraft.Windows.exe", pid)) {
+        std::cerr << "[ERROR] Minecraft not found!" << std::endl;
+        std::cout << "Press Enter to exit..." << std::endl;
+        std::cin.get();
+        return 1;
     }
 
     std::cout << "[INFO] Found Minecraft! PID: " << pid << std::endl;
@@ -107,7 +105,8 @@ int main() {
     if (InjectDll(pid, dllPath)) {
         std::cout << std::endl;
         std::cout << "[SUCCESS] Injected successfully!" << std::endl;
-    } else {
+    }
+    else {
         std::cerr << std::endl;
         std::cerr << "[FAIL] Injection failed!" << std::endl;
     }

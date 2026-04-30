@@ -4,5 +4,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="injector/injector.vcxproj" Id="53f11f16-6dda-47ed-8fcc-f06a4e5b1c51" />
   <Project Path="MCHook.vcxproj" Id="4a93c105-f6f9-4d26-bce7-faf1b7395d8f" />
 </Solution>
