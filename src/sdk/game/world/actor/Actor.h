@@ -4,6 +4,7 @@
 #include "src/utils/MemoryUtils.h"
 #include "src/utils/Utils.h"
 #include "components/StateVectorComponent.h"
+#include "components/ActorRotationComponent.h"
 #include "../block/BlockSource.h"
 class LocalPlayer;
 class Level;
@@ -14,6 +15,7 @@ public:
 	float distanceTo(Actor* actor);
 	Vec3* getPosition();
 	StateVectorComponent* getStateVector();
+	ActorRotationComponent* getActorRot();
 	Vec3* getPositionPrev();
 	Vec3* getPosDelta();
 	void setPosition(Vec3 &pos);

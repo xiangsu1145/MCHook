@@ -11,5 +11,10 @@ public:
 	void onEnable() override;
 	void onDisable() override;
 	void onTickEvent(NormalTickEvent& event);
+	void onPacketOutEvent(PacketOutEvent& event);
+	void onRenderEvent(RenderEvent& event);
+	Vec2 mRot;
+	bool mRotating = false;
+	void rotate(Actor* actor);
 };
 

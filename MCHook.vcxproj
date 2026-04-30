@@ -169,6 +169,7 @@
     <ClInclude Include="src\sdk\game\network\packet\IPacketHandlerDispatcher.h" />
     <ClInclude Include="src\sdk\game\network\packet\Packet.h" />
     <ClInclude Include="src\sdk\game\network\packet\PlayerAuthInputPacket.h" />
+    <ClInclude Include="src\sdk\game\world\actor\components\ActorRotationComponent.h" />
     <ClInclude Include="src\sdk\game\world\actor\components\StateVectorComponent.h" />
     <ClInclude Include="src\sdk\game\world\block\BlockLegacy.h" />
     <ClInclude Include="src\sdk\game\world\block\Block.h" />

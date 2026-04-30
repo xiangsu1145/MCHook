@@ -31,6 +31,15 @@ Vec3* Actor::getPosDelta() {
 	return &getStateVector()->mPosDelta;
 }
 
+ActorRotationComponent* Actor::getActorRot() {
+	auto result = SigManager::get(SignatureID::Actor_getRot);
+	if (!result) {
+		Logger::error("Failed to find Actor::getRot");
+	}
+	auto call = (ActorRotationComponent * (__fastcall*)(void*)) (*result);
+	return call(this);
+}
+
 void Actor::setPosition(Vec3& pos) {
 	auto result = SigManager::get(SignatureID::Actor_setPosition);
 	if (!result) {

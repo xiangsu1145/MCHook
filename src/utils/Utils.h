@@ -51,6 +51,17 @@ struct Vec3 {
     float distanceXZ(const Vec3& o) const { return std::sqrt((x - o.x) * (x - o.x) + (z - o.z) * (z - o.z)); }
     Vec2 toVec2() const { return { x, z }; }
     std::string toString() const { return "Vec3(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")"; }
+
+    Vec2 CalcAngle(const Vec3& dst) const {
+        Vec3 diff = dst - *this;
+        float len = diff.length();
+        if (len < 0.0001f)
+            return Vec2(0, 0);
+
+        float pitch = asinf(diff.y / len) * (-57.295779513f); // -180/π
+        float yaw = -atan2f(diff.x, diff.z) * 57.295779513f; // 180/π
+        return Vec2(pitch, yaw);
+    }
 };
 
 struct BlockPos {

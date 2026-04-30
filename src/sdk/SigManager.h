@@ -17,6 +17,7 @@ enum class SignatureID {
     Actor_getDimension,
     Actor_getFallDistance,
     Actor_jumpFromGround,
+    Actor_getRot,
 
     //Player class
 
