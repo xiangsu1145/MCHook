@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCHook - Admin Panel</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="card">
+    <div class="nav-bar">
+      <h2>Admin Panel</h2>
+      <button onclick="logout()" style="background: #666;">Logout</button>
+    </div>
+
+    <div id="login-section" class="hidden">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="admin-username" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="admin-password" placeholder="Password">
+      </div>
+      <button onclick="adminLogin()">Login</button>
+      <div id="admin-error" class="error"></div>
+    </div>
+
+    <div id="admin-section" class="hidden">
+      <h3 class="section-title">Generate Key</h3>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Key Type</label>
+          <select id="key-type" style="width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;">
+            <option value="trial">Trial</option>
+            <option value="permanent">Permanent</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Days (for trial)</label>
+          <input type="number" id="key-days" value="7" min="1" max="365">
+        </div>
+      </div>
+      <button onclick="generateKey()">Generate Key</button>
+      <div id="generated-key" class="success" style="margin-top:15px;font-size:16px;font-weight:600;"></div>
+
+      <h3 class="section-title">Keys</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Type</th>
+            <th>Expires</th>
+            <th>Used By</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="keys-table"></tbody>
+      </table>
+
+      <h3 class="section-title">Users</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Created</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="users-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
